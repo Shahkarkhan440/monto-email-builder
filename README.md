@@ -276,15 +276,6 @@ To add a starter template:
 
 To add a category, add its id to `TEMPLATE_CATEGORIES` in `builtInTemplates.ts` and its label under `templateCategories` in both locale files. Categories with no templates are hidden automatically. The order of `BUILT_IN_TEMPLATES` decides which 5 templates appear in the sidebar.
 
-## In production
-
-Used in production by the [uSpeedo email product](https://console.uspeedo.com/email?source_code=HI3880).
-
-A large collection of email templates is available at: https://console.uspeedo.com/email/template?source_code=HI3880
-
-<img width="1513" height="941" alt="image" src="https://github.com/user-attachments/assets/a0861627-2894-40aa-a464-7624aaa59c07" />
-
-
 ## Development
 
 ```bash
