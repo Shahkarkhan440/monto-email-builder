@@ -219,6 +219,62 @@ function MyComponent() {
 - ✅ Internationalization (Chinese/English)
 - ✅ Image upload support
 - ✅ Fully customizable
+- ✅ Locked header and footer with predefined templates
+- ✅ Template galleries with live previews and categories
+- ✅ 31 ready-to-use starter email templates
+
+## Header, footer and templates
+
+### Locked header and footer
+
+Every document always has one **header** and one **footer**, kept at the top and bottom of the email. They can't be deleted, moved or duplicated, so every email you send has a consistent header and footer.
+
+- **Choosing one:** an empty header or footer shows a **+ Select header** / **+ Select footer** box on the canvas. Click it to pick from the predefined templates.
+- **View-only in the email:** in the normal view, the header and footer can't be edited block by block. Hover over one to **Change** it (pick another template) or **Edit** it.
+- **Editing mode:** **Edit** shows only that header or footer, where you can change, add or remove its blocks. Click **Done** to return to the full email.
+- **Resetting:** click the header or footer and use **Delete** in its block menu to clear it. The **Select** box then appears again.
+
+There are 8 header and 8 footer templates, including logo + navigation, brand banner, announcement bar, newsletter masthead, social links, dark footer, two-column footer and app download. Every footer includes an unsubscribe link using the `{%unsubscribe_link%}` system variable.
+
+### Template galleries
+
+- **Header / Footer Templates** (left panel): the first 3 headers and 3 footers are listed, and **More** opens a gallery with live previews of all of them.
+- **Built-in templates** (left panel): the first 5 are listed, and **Show more** opens a gallery of all templates, organised into category tabs: All, Featured, Layouts, Ecommerce, Marketing, Transactional, Onboarding and Notifications.
+
+### Starter templates
+
+31 starter templates are included, each with a predefined header and footer:
+
+- **Featured:** branded, photo-based emails (coffee shop menu, fashion lookbook, Black Friday sale, travel deals, restaurant specials, gym membership, real estate listings, skincare launch, SaaS product update, festival tickets)
+- **Layouts:** one-column, two-column zig-zag, 2×2 grid, 3×2 product grid, 4-column stats, split hero, magazine, webinar agenda, testimonials and holiday greeting
+- **Essentials:** welcome, newsletter, promotion, order confirmation, shipping update, password reset, verification code, event invitation, abandoned cart, feedback request and product announcement
+
+> Starter templates use placeholder images from `placehold.co` and free photos from Unsplash (`images.unsplash.com`). For production, replace them with your own hosted images.
+
+### Adding your own templates
+
+| What | Where |
+|------|-------|
+| Header and footer templates | `src/documents/editor/headerFooterTemplates.ts` |
+| Starter email templates | `src/getConfiguration/starterTemplates.ts` |
+| Built-in template list, categories and sidebar order | `src/getConfiguration/builtInTemplates.ts` |
+| Template loaders | `src/getConfiguration/index.tsx` |
+| Labels (English / Chinese) | `src/i18n/locales/en.json`, `src/i18n/locales/zh.json` |
+
+To add a starter template:
+
+1. Add it to `STARTERS` in `starterTemplates.ts`, choosing a `header` and `footer` template id and the body blocks.
+2. Register a loader in `getConfiguration/index.tsx`:
+   ```ts
+   'starter-my-template': () => import('./starterTemplates').then(m => m.buildStarterTemplate('my-template')),
+   ```
+3. Add it to `BUILT_IN_TEMPLATES` in `builtInTemplates.ts` with one or more categories:
+   ```ts
+   { sampleName: 'starter-my-template', labelKey: 'starterTemplates.my-template', categories: ['marketing'] },
+   ```
+4. Add its name under `starterTemplates` in both locale files.
+
+To add a category, add its id to `TEMPLATE_CATEGORIES` in `builtInTemplates.ts` and its label under `templateCategories` in both locale files. Categories with no templates are hidden automatically. The order of `BUILT_IN_TEMPLATES` decides which 5 templates appear in the sidebar.
 
 ## In production
 
