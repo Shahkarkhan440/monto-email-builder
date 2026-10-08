@@ -1,58 +1,58 @@
-# Email Builder - 邮件模板编辑器组件库
+# Email Builder - Email Template Editor Component Library
 
 > node >= 18+ + pnpm 10
 
-一个功能完整的邮件模板编辑器 React 组件，可以在其他 React 项目中使用。
+A full-featured email template editor React component that can be used in other React projects.
 
-## 项目结构
+## Project structure
 
 ```
 packages/editor-sample/
-├── src/              # 库源代码（会被打包到 npm）
-│   ├── EmailBuilder/    # 主组件
-│   ├── App/             # 内部组件
-│   ├── documents/       # 核心逻辑
-│   ├── getConfiguration/ # 配置管理
-│   ├── i18n/            # 国际化
-│   ├── theme.ts         # 主题配置
-│   └── index.ts         # 库入口文件
-├── docs/             # 开发预览项目（不会被打包）
-│   ├── main.tsx         # 预览入口
-│   ├── index.html       # 预览 HTML
-│   └── favicon/         # 网站图标
-├── dist/              # 库构建输出（发布到 npm）
-└── docs-dist/         # 预览构建输出（不发布）
+├── src/              # Library source code (bundled and published to npm)
+│   ├── EmailBuilder/    # Main component
+│   ├── App/             # Internal components
+│   ├── documents/       # Core logic
+│   ├── getConfiguration/ # Configuration management
+│   ├── i18n/            # Internationalization
+│   ├── theme.ts         # Theme configuration
+│   └── index.ts         # Library entry point
+├── docs/             # Development preview project (not bundled)
+│   ├── main.tsx         # Preview entry point
+│   ├── index.html       # Preview HTML
+│   └── favicon/         # Site icons
+├── dist/              # Library build output (published to npm)
+└── docs-dist/         # Preview build output (not published)
 ```
 
-- **库代码**：`src/` 文件夹包含所有库代码，会被打包到 npm
-- **开发预览**：`docs/` 文件夹包含本地开发和预览的代码，不会被打包
-- **构建命令**：
-  - `npm run dev` - 启动开发预览服务器（使用 docs 文件夹）
-  - `npm run build:lib` - 构建库代码（输出到 dist 文件夹）
-  - `npm run build` - 构建预览版本（输出到 docs-dist 文件夹）
+- **Library code**: the `src/` folder contains all library code and is bundled for npm
+- **Development preview**: the `docs/` folder contains code for local development and preview, and is not bundled
+- **Build commands**:
+  - `npm run dev` - start the development preview server (uses the docs folder)
+  - `npm run build:lib` - build the library (outputs to the dist folder)
+  - `npm run build` - build the preview site (outputs to the docs-dist folder)
 
-## 安装
+## Installation
 
 ```bash
 npm install monto-email-builder
-# 或
+# or
 yarn add monto-email-builder
-# 或
+# or
 pnpm add monto-email-builder
 ```
 
-### 安装 peerDependencies
+### Install peerDependencies
 
-由于这是一个库，您需要安装以下 peerDependencies：
+Because this is a library, you need to install the following peerDependencies:
 
 ```bash
-# 必需依赖
+# Required dependencies
 npm install react react-dom
 npm install @mui/material @mui/icons-material
 npm install @emotion/react @emotion/styled
 npm install zustand zod react-colorful
 
-# monto-email 系列包
+# monto-email packages
 npm install monto-email-block-button \
   monto-email-block-columns-container monto-email-block-container \
   monto-email-block-divider monto-email-block-heading \
@@ -61,13 +61,13 @@ npm install monto-email-block-button \
   monto-email-document-core monto-email-core \
   monto-email-block-video monto-email-block-socials
 
-# 可选依赖（用于代码高亮功能，HTML/JSON 输出预览）
-# 如果使用代码高亮功能，需要安装 react-syntax-highlighter
+# Optional dependency (for syntax highlighting in the HTML/JSON output preview)
+# Install react-syntax-highlighter if you use syntax highlighting
 npm install react-syntax-highlighter
-# 注意：代码格式化使用纯 JavaScript 实现，无需额外依赖
+# Note: code formatting is implemented in plain JavaScript and needs no extra dependencies
 ```
 
-或者使用 yarn/pnpm：
+Or with yarn/pnpm:
 
 ```bash
 # yarn
@@ -77,7 +77,7 @@ yarn add react react-dom @mui/material @mui/icons-material @emotion/react @emoti
 pnpm add react react-dom @mui/material @mui/icons-material @emotion/react @emotion/styled zustand zod react-colorful monto-email-block-button monto-email-block-columns-container monto-email-block-container monto-email-block-divider monto-email-block-heading monto-email-block-html monto-email-block-image monto-email-block-spacer monto-email-block-text monto-email-document-core monto-email-core monto-email-block-video monto-email-block-socials
 ```
 
-## 基本使用
+## Basic usage
 
 ```tsx
 import { EmailBuilder } from 'monto-email-builder';
@@ -87,9 +87,9 @@ function MyApp() {
 }
 ```
 
-### 内嵌在容器中使用
+### Embedding in a container
 
-组件支持内嵌在任意容器中，只需要给容器设置固定高度即可：
+The component can be embedded in any container; just give the container a fixed height:
 
 ```tsx
 import { EmailBuilder } from 'monto-email-builder';
@@ -103,7 +103,7 @@ function MyApp() {
 }
 ```
 
-或者使用 CSS：
+Or with CSS:
 
 ```tsx
 import { EmailBuilder } from 'monto-email-builder';
@@ -120,17 +120,17 @@ function MyApp() {
 ```css
 .email-builder-container {
   width: 100%;
-  height: 800px; /* 或使用其他高度值 */
+  height: 800px; /* or any other height */
 }
 ```
 
-## 完整示例
+## Full example
 
 ```tsx
 import { EmailBuilder, TEditorConfiguration } from 'monto-email-builder';
 
 function MyApp() {
-  // 初始文档配置（可选）
+  // Initial document configuration (optional)
   const initialDocument: TEditorConfiguration = {
     root: {
       type: 'EmailLayout',
@@ -144,14 +144,14 @@ function MyApp() {
     },
   };
 
-  // 文档变化回调
+  // Called when the document changes
   const handleChange = (document: TEditorConfiguration) => {
     console.log('Document changed:', document);
-    // 可以将文档保存到服务器
+    // You can save the document to your server
     // saveToServer(document);
   };
 
-  // 图片上传处理函数
+  // Image upload handler
   const handleImageUpload = async (file: File): Promise<string> => {
     const formData = new FormData();
     formData.append('image', file);
@@ -162,7 +162,7 @@ function MyApp() {
     });
     
     const data = await response.json();
-    return data.url; // 返回图片 URL
+    return data.url; // Return the image URL
   };
 
   return (
@@ -180,15 +180,15 @@ function MyApp() {
 
 ### EmailBuilder Props
 
-| 属性 | 类型 | 默认值 | 说明 |
+| Prop | Type | Default | Description |
 |------|------|--------|------|
-| `initialDocument` | `TEditorConfiguration \| undefined` | `undefined` | 初始化的邮件模板配置 JSON |
-| `initialLanguage` | `'zh' \| 'en'` | `'en'` | 初始语言 |
-| `imageUploadHandler` | `(file: File) => Promise<string> \| undefined` | `undefined` | 图片上传回调函数，接收 File 对象，返回 Promise<string>（图片 URL） |
-| `onChange` | `(document: TEditorConfiguration) => void \| undefined` | `undefined` | 文档变化时的回调函数 |
-| `theme` | `Theme \| undefined` | `undefined` | 自定义 Material-UI 主题 |
+| `initialDocument` | `TEditorConfiguration \| undefined` | `undefined` | Initial email template configuration JSON |
+| `initialLanguage` | `'zh' \| 'en'` | `'en'` | Initial language |
+| `imageUploadHandler` | `(file: File) => Promise<string> \| undefined` | `undefined` | Image upload callback; receives a File and returns a Promise<string> (the image URL) |
+| `onChange` | `(document: TEditorConfiguration) => void \| undefined` | `undefined` | Called when the document changes |
+| `theme` | `Theme \| undefined` | `undefined` | Custom Material-UI theme |
 
-### 类型导出
+### Type exports
 
 ```tsx
 import type {
@@ -199,49 +199,49 @@ import type {
 } from 'monto-email-builder';
 ```
 
-### Hook 导出
+### Hook exports
 
 ```tsx
 import { useDocument, useLanguage } from 'monto-email-builder';
 
 function MyComponent() {
-  const document = useDocument(); // 获取当前文档
-  const language = useLanguage(); // 获取当前语言
+  const document = useDocument(); // Get the current document
+  const language = useLanguage(); // Get the current language
 }
 ```
 
-## 特性
+## Features
 
-- ✅ 可视化邮件模板编辑器
-- ✅ 支持多种邮件块类型（文本、图片、按钮、容器等）
-- ✅ 实时预览
-- ✅ 导出 HTML 和 JSON
-- ✅ 国际化支持（中文/英文）
-- ✅ 图片上传支持
-- ✅ 完全可定制
+- ✅ Visual email template editor
+- ✅ Many block types (text, image, button, container and more)
+- ✅ Live preview
+- ✅ Export to HTML and JSON
+- ✅ Internationalization (Chinese/English)
+- ✅ Image upload support
+- ✅ Fully customizable
 
-## 实际应用
+## In production
 
-已实际应用于[uspeedo邮件产品](https://console.uspeedo.com/email?source_code=HI3880) 欢迎使用
+Used in production by the [uSpeedo email product](https://console.uspeedo.com/email?source_code=HI3880).
 
-提供大量精美邮件模板：https://console.uspeedo.com/email/template?source_code=HI3880
+A large collection of email templates is available at: https://console.uspeedo.com/email/template?source_code=HI3880
 
 <img width="1513" height="941" alt="image" src="https://github.com/user-attachments/assets/a0861627-2894-40aa-a464-7624aaa59c07" />
 
 
-## 开发
+## Development
 
 ```bash
-# 安装依赖
+# Install dependencies
 npm install
 
-# 启动开发服务器
+# Start the development server
 npm run dev
 
-# 构建
+# Build
 npm run build
 ```
 
-## 许可证
+## License
 
 MIT
